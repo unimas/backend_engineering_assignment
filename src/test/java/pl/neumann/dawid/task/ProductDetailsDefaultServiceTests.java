@@ -27,14 +27,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+//FIXME: DN: fixme
 @ExtendWith(MockitoExtension.class)
-public class ProductDetailsControllerTests {
+public class ProductDetailsDefaultServiceTests {
     @Mock
     ProductCatalogService productCatalogService;
-    @Mock
-    PricingService pricingService;
-    @Mock
-    AvailabilityService availabilityService;
     @Mock
     CustomerContextMockService customerContextService;
 
@@ -45,8 +42,8 @@ public class ProductDetailsControllerTests {
     void shouldReturnFullObjectWhenCorrectDataGiven() throws InterruptedException {
         //given
         when(productCatalogService.getProductDetails(any())).thenReturn(prepareProduct(1));
-        when(pricingService.getPricing()).thenReturn(preparePricing());
-        when(availabilityService.getAvailabilityInfo()).thenReturn(prepareAvailabilityInfo(Markets.NETHERLANDS));
+        //when(pricingService.getPricing()).thenReturn(preparePricing());
+        //when(availabilityService.getAvailabilityInfo()).thenReturn(prepareAvailabilityInfo(Markets.NETHERLANDS));
         when(customerContextService.getCustomerDetails(any())).thenReturn(prepareCustomerDetails(312));
 
         //when
@@ -64,8 +61,8 @@ public class ProductDetailsControllerTests {
     void shouldReturnObjectWithoutCustomerDetailsWhenNoCustomerIdGiven() throws InterruptedException {
         //given
         when(productCatalogService.getProductDetails(any())).thenReturn(prepareProduct(1));
-        when(pricingService.getPricing()).thenReturn(preparePricing());
-        when(availabilityService.getAvailabilityInfo()).thenReturn(prepareAvailabilityInfo(Markets.NETHERLANDS));
+        //when(pricingService.getPricing()).thenReturn(preparePricing());
+        //when(availabilityService.getAvailabilityInfo()).thenReturn(prepareAvailabilityInfo(Markets.NETHERLANDS));
 
         //when
         ResponseEntity<ProductDetailsResponse> response = controller.getProductDetails(1, Markets.NETHERLANDS, null);
